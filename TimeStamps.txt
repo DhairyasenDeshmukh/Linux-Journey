@@ -1,0 +1,32 @@
+#  What is a Timestamp in Linux?
+
+Every file has three important timestamps:
+
+Access time (atime) – Last time the file was read.
+Modify time (mtime) – Last time the file content was changed.
+Change time (ctime) – Last time metadata (like permissions or name) was changed.
+
+# Why Change Timestamps?
+
+1. Trigger automated tasks
+Some scripts, CI/CD pipelines, or build systems (like make) rely on file timestamps to decide if something needs to be rebuilt. If a file looks "newer," it might trigger updates.
+
+$ touch config.yaml   # Pretend config just got updated
+
+2. Fake modification for testing
+You may want to test how a system reacts to a file change without editing the content.
+
+Example:
+
+$ touch important.log  # System thinks it was just modified
+
+3. Preserve or sync file timestamps
+If you're syncing files across systems (e.g. with rsync), touch can help align timestamps to avoid redundant transfers.
+
+4. Sort or organize files
+You can set a custom timestamp to group/sort files by date in a specific way.
+
+$ touch -d "2023-01-01 12:00" report.txt
+
+#  Note:
+touch only modifies atime and mtime, not ctime.

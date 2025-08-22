@@ -1,0 +1,213 @@
+1. stdout (Standard Out)
+- ">" & ">>" decides where the standard output of the command goes into.
+- When we use echo command if we do not give any specific redirector, the output is given into the shell.
+When we give ">" redirector with a file the output goes into the file. If you use this redirector again the file's content might overwrite.
+- When we give ">>" redirector the file's content gets appended. If a file does not exist the file is created.
+
+	Code				Function
+	____________________________________________________________________
+	$ echo Zoltrox			Gives text output "Zoltrox" in shell
+	$ echo Zoltrox > Frieren 	Creates a file Frieren and adds text in it.
+	$ echo Zoltrox >> Himmel	Appends the text in that existing file.
+	
+- Try example commands
+	
+	$ ls -l /var/log > myoutputs.txt
+	$ echo Hello > rm
+	$ > somefile.txt
+	
+
+2. stdin (Standard Input)
+- By using "<" we give an input director for output generation.
+- By using this we can use different files for giving input to other files.
+
+- Example:
+	
+	Code					Function
+	____________________________________________________________________
+	$ cat < textfile1.txt > textfile2.txt	Writes contents of tf1 to tf2.
+	$ cat < textfile1.txt >> textfile2.txt	Appends contents of tf1 to tf2.
+	NOTE: Input file cannot be output file
+
+3. stderr (Standard Error)
+- By default, both stdout and stderr show in the terminal.
+- stdout (1): Normal command output | stderr (2): Error messages | stdin (0): User input.
+- Why Redirect?
+	Separate normal output from errors
+	Log outputs for later review
+	Suppress unwanted messages
+	Automate scripts with clean handling
+	Improve debugging and system maintenance
+
+	# Try to list a non-existent directory
+	Code					Function
+	________________________________________________________________
+	$ ls /fake/directory > peanuts.txt       # Only stdout (nothing)
+	$ ls /fake/directory 2> peanuts.txt      # Only stderr saved
+	$ ls /fake/directory > peanuts.txt 2>&1  # Both stderr & stdout saved
+	$ ls /fake/directory &> peanuts.txt      # Same as above (shorthand)
+	$ ls /fake/directory 2> /dev/null        # Hides error messages
+
+
+4. pipe and tee
+- " | " operator is used for piping.
+- This allows us to get the stdout of a command and make the stdin to another process.
+- tee command is used to write the output to two different streams. tee Creates a file if it doesn't exist.
+
+	Code					Function
+	____________________________________________________________________________________________________________________
+	$ ls -la /etc | less			Lists all files with details, pipes the output, displays output page by page
+	$ ls | tee peanuts.txt			Shows output of lists and also saves them in a text file.
+	$ ls -la /etc | tee peanuts.txt | less
+	
+
+
+5. env (Environment)
+- The env command shows a list of environment variables—these are like settings or information your system and programs use to run properly.
+- Think of it like your system’s cheat sheet that apps and tools refer to.
+-  Finding where your scripts or tools will run from
+	Example: When you run python, your system checks $PATH to find it.
+	If Python is not in $PATH, it says "command not found."
+
+- Setting environments for coding tools
+	Tools like Jupyter, conda, venv, or Spark may need special environment variables.
+	Example:
+		export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+		
+- Running experiments with different settings
+	Set variables temporarily:
+		MY_VAR=value python script.py
+		
+- Checking if the environment is set up correctly
+	Example: If your pip is installing to a wrong folder, check:
+		echo $PATH
+	
+	Code				Function
+	____________________________________________________________________
+	$ echo $USER     		Shows your username
+	$ echo $HOME     		Show your home folder
+	$ echo $PATH     		Show where Linux looks for programs
+	$ env            		Show all environment variables
+
+
+6. cut
+- Used to extract the contents of a file.
+- Output from sensors or APIs
+- Text files with structured data
+- You can use cut to extract columns, clean data, or automate parsing.
+- flags:
+	
+	-b, --bytes=LIST        select only these bytes
+  	-c, --characters=LIST   select only these characters
+ 	-d, --delimiter=DELIM   use DELIM instead of TAB for field delimiter
+  	-f, --fields=LIST       select only these fields;  also print any line that contains no delimiter character, unless the -s option is specified
+  	
+  	
+  	Code					Function
+  	__________________________________________________________________________________________
+  	$ cut -c 5 textfile.txt			Exctracts 5th character from each line of the file
+  	$ cut -c -5 textfile.txt		Exctracts till 5th character from each line
+  	$ cut -c 5- textfile.txt		Extracts from 5th character from each line
+  	$ cut -c 5-10 textfile.txt		Extracts characters between 5 to 10 from each line.
+  	cut -d',' -f2 cyberpunk_data.csv
+  	
+  	
+7. paste
+- Similar to cat command, it merges lines from different files together.
+- You have two separate files/columns and want to combine them into one.
+- You want to quickly preview or prepare data for .csv, .tsv, or scripts.
+
+	Code					Function
+	_______________________________________________________________________________
+	$ paste filename.txt			Pastes the contents of the file
+	$ paste -s filename.txt			Pastes the contents of the file side by side
+	$ paste file1.txt file2.txt		Pastes the contents of both file side by side.
+	
+	
+8. head
+- This command returns the first 1 lines of the file by default.
+- the "-n (number)" flag can be used to specify the number of lines.
+
+	Code					Function
+	____________________________________________________________________________
+	$ head file.txt				Returns the first 10 lines of the file.
+	$ head -n 5 file.txt			Returns the first 5 lines of the file.
+	
+
+9. tail
+- Similar to head command the tail command lets you see the last 10 lines by default
+- follow flag (-f) this will follow the flag as it grows.
+
+	Code					Function
+	____________________________________________________________________________
+	$ tail file.txt				Returns the last 10 lines of the file.
+	$ tail -n 5 file.txt			Returns the last 5 lines of the file.
+	$ tail -f file				Changing while you interact with your system and using tail -f you can see everything that is getting added to that file.
+	
+	
+10. expand and unexpand
+- if you just type the command in the shell, it waits for stdin and processes the input accordingly.
+- expand:	Used to convert tabs into spaces.
+- unexpand:	Used to convert spaces into tabs.
+- Syntax: expand filename.txt
+
+
+11. join and split
+- Helps you join multiple files together by common field. (First field by default).
+- You need to give flags to join files based on the field you want to join them to.
+- Split command is used to split the files. Files will be split in xaa name format
+
+	Code					Function
+	____________________________________________________________________________
+	$ join file1.txt file2.txt		Joins the files based on common filed. (First Field has to be common)
+	$ join -1 2 -2 1 file1.txt file2.txt	Joins the files based on common field placed at different sequences.
+	$ split filename.txt			Splits the file
+	
+	Note: In the above command: -1(first file) 2(second field) -2(second file) 1(first field)
+	
+
+
+12. sort
+- Used to sort the file in a specific manner depending on the sort factor.
+- example:
+
+	$ sort -n filename.txt		-> Sorts the file in numeric order.
+
+
+13. tr (Translate)
+- The tr (translate) command allows you to translate a set of characters into another set of characters.
+- example:
+	
+	$ tr a-z A-Z			-> Converts the input into upper case
+
+
+14. uniq (Unique)
+- If you want to remove duplicates you can use uniq command.
+- Limitation: duplicate values has to be adjacent. Solution use sort and Unique together.
+
+	Code					Function
+	_____________________________________________________________________________________
+	$ uniq filename				Returns unique values from the file
+	$ uniq -c filename			Returns the count of each word from the file
+	$ sort filename | uniq			Returns the sorted uniq list from the file. Use this in case there are non adjacent duplicates.
+	
+	
+15. wc and nl
+- Returns word count and line counts from files.
+- wc commands returns value in this format: lines, words, bytes
+- nl command returns the number of lines with each line.
+
+	Code					Function
+	__________________________________________________________________________________________
+	$ wc filname				Returns count of lines, words and bytes of the file
+	$ wc -w filename			Returns only count of words of the files.
+	$ nl filename				Returns the lines with line numbers
+	$ nl filename | tail			Retuns the last 10 lines with line number
+	
+	
+16. grep
+- It allows you to search files for characters that match a certain pattern. 
+	
+	$ grep fox sample.txt
+
+

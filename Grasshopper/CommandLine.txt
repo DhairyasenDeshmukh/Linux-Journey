@@ -1,0 +1,226 @@
+# Learn the fundamentals of the command line, navigating files, directories and more.
+
+1. THE SHELL ()
+- Shell is a program that takes your command and sends them to the operating system to execute.
+- All Linux Distro will use default shell as bash shell (Bourne Again shell).
+- Depending on the distribution your shell prompt might change.
+
+- Some basic shell commands:
+	$ echo Text
+	Returns the text in the terminal
+	
+	$ date
+	Returns the date and time in this format : Tue Jul 15 10:03:41 AM IST 2025
+	
+	$ whoami
+	Returns the user name
+	
+
+2. pwd (Print Working Directory)
+- Everything in Linux is a file. Every file is organized in a hierarchical directory tree.
+- The first directory in the file system is named root directory.
+- pwd just shows which directory you are in. The path stems from root directory
+	
+	$ pwd
+	Returns the path from root to current directory: /home/username
+
+
+3. cd (Change Directory)
+- We navigate in shell using paths. There are two ways to specify a path.
+	- Absolute path: This is the path from the root directory. Every time your path starts with "/" that means you are starting from the root directory. 
+	- Relative path: This is the path from where you are currently in file system.
+
+- For directory navigation these are the following syntax:
+	Code			Function
+	_________________________________________
+	cd /path		Jump to directory.
+	cd Folder_name		Going inside a directory that is present in current directory.
+	cd ..			Takes you to the parent directory of the current directory.
+	cd ~			This defaults to your "home directory" (/home/username)
+	cd -			This will take you to previous directory that you were just at.
+	cd			This defaults to your "home directory" (/home/username)
+
+
+4. ls (List Directories)
+- This command will list all the folders and files inside the current directory however you can specify the path you want to list the directories of.
+- It can also show the detail information about the files and folders.
+- Not all files will be shown with ls commands, files with ".name" are hidden and require $ ls -a
+- $ ls -l shows the detailed information about the files. From left: file permissions, number of links, owner name, owner group, file size, timestamp of last modification, and directory/file name.
+- $ ls -la or $ ls -al Shows hidden files in detail. The order of the code determines what shows first.
+
+	Code				Function
+	______________________________________________
+	$ ls or $ ls /path  		List of files in current or path directory.
+	$ ls -a				List of hidden directories included.
+	$ ls -l				Detailed list of directories.
+	$ ls -la or $ ls -al		Detailed list of hidden directories.
+	$ ls -R				Returns complete tree from current directory to leaf nodes.
+	$ ls -r				Returns list in reverse order.
+	$ ls -t				Returns list of sorted list based on modification time.
+	
+	NOTE: YOU CAN CREATE COMBINATIONS OF MULTIPLE ls COMMANDS
+	
+
+5. touch
+- Allows you to create new empty files.
+- Also used to change the timestamps on existing files and directories.
+	
+	$ touch file_name.extension
+	ex: touch textfile.txt
+	
+	
+6. file
+- In linux filenames aren't required to represent the contents of file. You can create a file called funny.gif that isn't actually a GIF.
+	
+	$ file banana.jpg
+	
+7. cat
+- Cat command is used for reading a file that has short content.
+- not great while reading large files.
+
+	Code			Function
+	__________________________________________________
+	$ cat filename		Returns the File's content
+	$ cat > filename	Create a file and opens it in a write mode
+	$ cat >> filename	Appends content at the end of an existing file content.
+
+8. less
+- Best option for viewing large text files.
+- The text is displayed in a paged manner.
+- Once inside the less terminal you can navigate through specific commands.
+- You can also use "h" command if you need a little help about the less terminal in detail.
+
+	$ less filename
+	
+	NAVIGATION COMMAND:
+	
+	q - Used to quit out of less and go back to your shell.
+	Page up, Page down, Up and Down - Navigate using the arrow keys and page keys.
+	g - Moves to beginning of the text file.
+	G - Moves to the end of the text file.
+	/search - You can search for specific text inside the text document. Prefacing the words you want to search with 
+	h - If you need a little help about how to use less while you’re in less, use help.
+	
+
+9. history
+- history command is used to see all the commands that were typed before.
+- clear command is used to clear the clutter of the terminal.
+	
+	$ history
+	$ clear
+
+10. cp (Copy)
+- Used to copy files or directories across the Operating System.
+- Syntax:
+		$ cp file_name /path
+- You can copy multiple files and directories at once using wildcards.
+Wildcards:
+1. (*): Represents all single characters or any string.
+2. (?): Used to represent one character.
+3. ([]): Represents any character with brackets.
+
+	Code						Function
+	_______________________________________________________________________________________________
+	cp file_name /target_path				Copies the file to the target path from current directory.
+	cp /source_path/file_name /target_path		Copies files from source to target directory
+	cp -r source_directory/ /target_path		Copies all files from the directory to path
+	cp *.extension	/target_path			Copies all .extension files from current directory to target path.
+	cp *.extension /source_path/ /target_path	Copies all .extension files from source path to target path.
+	cp - i file_name /target_path			Copies file to target path but avoid overwriting the file with same name by giving prompt.
+
+
+11. mv (Move)
+- mv is a command very similar to the cp command. This just moves the files instead of copying
+- mv is also used to rename files and directories.
+These are the following syntax:
+
+	Code					Function
+	_____________________________________________________________________
+	mv file_name new_file_name		Renames the files / directory.
+	mv file_name /target_path		Moves the file from source to target directory.
+	mv * /target_path			Moves all the files from current directory to path directory
+	mv -r source directory/ /target_path	Moves all files from source directory to target path
+	mv -i file_name /target_path		Moves file to target path but avoid overwriting the file with same name by giving prompt.
+	mv -b file_name /target_path		Moves file to target directory and overrides the file with same name but also creates a backup of the existing file.
+
+
+12. mkdir (Make Directory)
+- Used to make directories or sub directories.
+
+	Code					Function
+	_______________________________________________________
+	$ mkdir directory_name			Create directory
+	$ mkdir -p directory/subdirectory	Create sub directories while creating a directory
+	
+
+13. rm (Remove)
+- This command is used to remove files.
+- Write-protected files will prompt you before deleting a file.
+- Removing files and directories have their special cases.
+
+	Code					Function
+	__________________________________________________________________________
+	$ rm file_name				Removes the files
+	$ rm -f file_name			Forcefully removes the files
+	$ rm -i file_name			Gives you prompt to delete the files or not
+	$ rm -r directory			Removes the directory and all its subdirectories
+	$ rmdir directory			Removes a directory if its empty.
+	
+	NOTE: USE "rm -i file_name" FOR BETTER CONTROL OVER FILE DELETION.
+	
+
+NOTE: YOU CANT CREATE A FILE NAMES "-FILE" UNTIL YOU PUT " --" AFTER FILE CREATION OR DELETION COMMAND. REASON BEING THE SHELL READS "-" AS AN OPTION FOR THE COMMAND. CORRECT SYNTAX WILL BE
+
+	$ touch -- -file_name
+	$ rm -- -file_name
+
+
+14. find
+- This command is used for finding a file in your system.
+- You will have to specify the directory you will be searching in, you can also specify the type of file.
+- It looks inside the sub-directories of the directory you provided. Its better to mention the directory as home.
+
+	Code						Function
+	_____________________________________________________________________________________
+	$ find /home -name filename.extension		Finds the file in the given directory
+	$ find /home -type file_type -name filename	Finds the specific file type in the given directory.
+	$ find /directory -type f -name "*.log"		Finds the file ending with ".log"
+
+
+15. help
+- It is a built in shell tool yo help you understand how to use any command or check what flags are available for a command.
+
+	$ help echo		echo: example command
+	$ echo --help
+
+
+16. man
+- Man pages are manuals that are by default built into most Linux operating systems. They provide documentation about commands and other aspects of the system.
+
+	$ man ls		ls: example command
+
+
+17. whatis
+- This command provides a brief description of the command, similar to man, but in short.
+
+	$ whatis cat		cat: example command
+
+
+18. alias
+- Alias basically gives a shortname for your long commands, so instead of typing those, you can type alias.
+- This gets reset after reboot.
+
+	$ alias foobar='ls -la'
+	$ unalias foobar
+
+
+19. exit
+- Exits from the shell terminal
+
+	$ exit
+
+20. logout
+- logs out from the session
+
+	$ logout
+asd

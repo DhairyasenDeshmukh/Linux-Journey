@@ -1,0 +1,17 @@
+# What is Linux? Get started with choosing a distribution and installation.
+
+1. HISTORY
+- 1969 Ken Thompson and Dennis Ritchie of Bell Laboratories developed the UNIX operating system.
+- Later written in C to make it more portable.
+- 1991 Linus Torvalds started developing LINUX.
+
+2. CHOOSING A LINUX DISTRIBUTION
+Linux system is divided into two main parts:
+	- Hardware: This includes all the hardware that your system runs on as well as memory, CPU, 		drives, etc.
+	- Linux Kernel: Kernel is the core of Operating system. It manages the hardware and tells it how to interact with the system.
+	- User Space: This is where users will directly interact with the system.
+	
+3. Debian (Installed on this system)
+- There are three branches that you can use: Stable, Testing and Unstable.
+- Testing branch is similar to Windows Insider program (Unstable - Not recommended).
+

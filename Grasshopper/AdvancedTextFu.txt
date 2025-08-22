@@ -1,0 +1,109 @@
+1. regex (Regular expression)
+- regex is used for pattern based selection
+- regex is often used with commands like grep, sed, and awk to filter or modify text based on patterns instead of exact matches.
+- It is case sensitive and some flags like "{n}", "{n,}", "{n,m}"
+
+- Example expressions:
+	
+	Symbol		Meaning					Example
+	.		Matches any single character		h.t → matches "hat", "hit", "hot"
+	^		Start of line				^Hello → matches lines starting with "Hello"
+	$		End of line				world$ → matches lines ending with "world"
+	[] 		Match any one character inside brackets [aeiou] → matches any vowel
+	[^]		Match anything not inside brackets	[^0-9] → matches non-digits
+	{n}		Exactly n occurrences			a{3} → matches "aaa"
+	{n,}		At least n occurrences			a{2,} → matches "aa", "aaa", "aaaa"
+	{n,m}		Between n and m occurrences		a{2,4} → matches "aa", "aaa", "aaaa"
+	
+- example commands:
+	
+	grep "^hello" file.txt        # lines starting with 'hello'
+	grep "world$" file.txt        # lines ending with 'world'
+	grep "[0-9]" file.txt         # lines containing a number
+	grep -E "cat|dog" file.txt    # lines with 'cat' or 'dog'
+
+
+2. Text editors
+- In linux community vim and Emacs are very popular and most of the linux users (hardcore) use these as their goto.
+- vim stands for vi improved
+
+
+3. Vim search pattern
+- Commands:
+	type			action
+	/pattern		to search for a pattern
+	?pattern		searches the file from bottom
+	n			to go forward in search
+	N			to go backwards in search
+	:q			exit
+	:qa!			to discard all changes and quit
+	:help			for on-line help
+	:help version9		for version infor
+	:help iccf		for information
+
+
+4. Vim advanced navigation
+- h or the left arrow - will move you left one character
+- j or the up arrow - will move you up one line
+- k or the down arrow - will move you down one line
+- l or the right arrow - will move you right one character
+
+
+5. Vim - Inserting and appending text
+- Vim has two main modes you will use often: Normal mode (for commands) and Insert mode (for typing text).
+- Press Esc to return to Normal mode
+- commands:
+	i – insert before the cursor
+	a – append after the cursor
+	I – insert at the beginning of the current line
+	A – append at the end of the current line
+	o – open a new line below the current line and start inserting
+	O – open a new line above the current line and start inserting
+	
+
+6. Vim Editing
+- Vim editing is done from normal mode.
+- Vim commands can be used by giving a number before the command to give how many words/lines should the command execute.
+- Commands:
+	Deletes (operator d):
+
+	x – delete the character under the cursor
+	dw – delete from cursor to start of next word
+	d$ – delete from cursor to end of line
+	dd – delete the current line
+	Counts apply: 3dd deletes three lines; 2dw deletes two words
+	Changes (operator c, delete then enter Insert mode):
+	
+	cw – change word from cursor
+	c$ – change to the end of the line
+	cc – change the whole line
+	Yank and Put (copy/paste):
+	
+	yw – yank word
+	yy – yank the current line
+	p – put (paste) after the cursor or below the line
+	P – put (paste) before the cursor or above the line
+	Replace and other handy edits:
+	
+	r{char} – replace the character under cursor with {char}
+	R – enter Replace mode to overwrite text
+	J – join the current line with the next line
+	. – repeat the last change
+
+Combine operators with motions for power: d} deletes to next paragraph; caw changes “a word” (word under cursor including surrounding space).
+
+
+7. Vim saving and Exiting
+- Commands:
+	:w - writes or saves the file
+	:q - quits out of Vim
+	:wq - writes and then quits
+	:q! - quits out of Vim without saving the file
+	ZZ - equivalent of :wq, but one character faster
+	u - undo your last action
+	Ctrl-r - redo your last action
+
+You may not think ZZ is necessary, but you'll eventually see that your fingers may tend to lean towards this rather than :wq.
+
+
+

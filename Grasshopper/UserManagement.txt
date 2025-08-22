@@ -1,0 +1,78 @@
+1. Users and Groups
+- Users and groups exist solely for access and permissions.
+- When running a process, it will run as the owner of that process.
+- Each user has their own home directory where their user-specific files are stored, usually located in /home/username.
+- The system uses user IDs (UID) to manage users.
+- The system also uses groups to manage permissions. Groups are just sets of users with permissions set by that group; they are identified by the system with their group ID (GID).
+- Sometimes these users are system daemons that continuously run processes to keep the system functioning.
+- root is the most powerful user on the system root can access any file and start and terminate any process.
+-The sudo command (superuser do) is used to run a command with root access.
+
+
+2. root
+- You can run commands as root by giving "su" command.
+- There are some downsides to using this method: it's much easier to make a critical mistake running everything as root, you won't have records of the commands you use to change system configurations, etc. Basically, if you need to run commands as the superuser, just stick to sudo.
+- There is a file called the /etc/sudoers file; this file lists users who can run sudo. You can edit this file with the visudo command.
+
+
+3. /etc/passwd
+- Remember that usernames aren't really identifications for users. The system uses a user ID (UID) to identify a user. To find out what users are mapped to what ID, look at the /etc/passwd file.
+
+-root:x:0:0:root:/root:/bin/bash
+
+Each line displays user information for one user; most commonly, you'll see the root user as the first line. There are many fields separated by colons that tell you additional information about the user. Let's look at them all:
+
+Username
+	User's password - The password is not really stored in this file; it's usually stored in the /		etc/shadow file. We'll discuss more about /etc/shadow in the next lesson, but for now, know that it 	contains encrypted user passwords. You can see many different symbols in this field: if you see an "x," that means the password is stored in the /etc/shadow file; a "*" means the user doesn't have login access; and if there is a blank field, that means the user doesn't have a password.
+
+The user ID - As you can see, root has the UID of 0.
+
+The group ID
+
+GECOS field
+	This is used to generally leave comments about the user or account, such as their real name or phone number. It is comma-delimited.
+
+User's home directory
+
+User's shell - You'll probably see a lot of users defaulting to bash for their shell.
+
+
+4. /etc/shadow
+- The /etc/shadow file is used to store information about user authentication.
+- The passwords are encrypted.
+- Reading the password
+	Username
+	Encrypted password
+	Date of last password changed - expressed as the number of days since Jan 1, 1970. If there is a 0, that means the user should change their password the next time they log in.
+	Minimum password age - Days that a user will have to wait before being able to change their password again.
+	Maximum password age - Maximum number of days before a user has to change their password.
+	Password warning period - Number of days before a password is going to expire.
+	Password inactivity period - Number of days after a password has expired to allow login with their password.
+	Account expiration date - Date that a user will not be able to log in.
+	Reserved field for future use.
+	
+
+
+5. /etc/groups
+- This file allows for different groups with different permissions.
+- Reading:
+	Group name
+	Group password - there isn't a need to set a group password; using an elevated privilege like 	sudo is standard. An asterisk (*) will be put in place as the default value.
+	Group ID (GID)
+	List of users - you can manually specify users you want in a specific group
+
+
+6. User Management
+
+# Adding Users
+- You can use the adduser or the useradd command. The adduser command contains more helpful features, such as making a home directory and more. There are configuration files for adding new users that can be customized depending on what you want to allocate to a default user.
+- sudo useradd bob
+
+# Removing user
+- To remove a user, you can use the userdel command.
+- sudo userdel bob
+
+# Changing Passwords
+- passwd bob
+
+
